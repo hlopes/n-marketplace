@@ -2,6 +2,8 @@
 
 import { useRef, useState } from 'react'
 
+import Link from 'next/link'
+
 import type { CustomCategory } from '@/app/(app)/(home)/types'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -34,6 +36,12 @@ export const CategoryDropdown = ({
     setIsOpen(false)
   }
 
+  const toggleDropdown = () => {
+    if (category?.subcategories?.length > 0) {
+      setIsOpen(!isOpen)
+    }
+  }
+
   return (
     <div
       className="relative"
@@ -43,6 +51,7 @@ export const CategoryDropdown = ({
     >
       <div className="relative">
         <Button
+          onClick={toggleDropdown}
           variant="elevated"
           className={cn(
             'hover:border-primary h-11 rounded-full border-transparent bg-transparent px-4 text-black hover:bg-white',
@@ -50,7 +59,12 @@ export const CategoryDropdown = ({
             isOpen && 'border-primary bg-white',
           )}
         >
-          {category.name}
+          <Link
+            prefetch
+            href={`/${category.slug === 'all' ? '' : category.slug}`}
+          >
+            {category.name}
+          </Link>
         </Button>
         {category?.subcategories?.length > 0 ? (
           <div

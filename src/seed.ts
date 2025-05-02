@@ -13,6 +13,10 @@ type InternalCategory = OmittedCategory & {
 }
 const categories: InternalCategory[] = [
   {
+    name: 'All',
+    slug: 'all',
+  },
+  {
     name: 'Business & Money',
     color: '#FFB347',
     slug: 'business-money',
